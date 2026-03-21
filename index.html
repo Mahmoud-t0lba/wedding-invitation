@@ -98,7 +98,7 @@
   section { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:5rem 1.5rem; position:relative; overflow:hidden; }
 
   /* ── HERO ── */
-  #hero { background: linear-gradient(135deg, #fefdfb 0%, #faf7f0 100%); text-align:center; gap:0; }
+  #hero { background: transparent; text-align:center; gap:0; }
   .hero-eyebrow { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.55em; color:var(--gold); opacity:0.8; text-transform:uppercase; margin-bottom:2.5rem; }
   .divider { width:100px; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:0 auto; }
   .names-en { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,13vw,8.5rem); font-weight:300; font-style:italic; line-height:0.9; color:var(--dark); display:flex; align-items:center; gap:1.2rem; justify-content:center; flex-wrap:wrap; margin:2rem 0 0.8rem; }
@@ -112,7 +112,7 @@
   .scroll-down { position:absolute; bottom:2rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.45em; color:var(--gold); opacity:0.4; animation:bounce 2s ease-in-out infinite; text-align:center; }
 
   /* ── SCRATCH ── */
-  #scratch-section { background:linear-gradient(135deg, #faf7f0 0%, #f5f1e8 100%); gap:1.8rem; text-align:center; }
+  #scratch-section { background:transparent; gap:1.8rem; text-align:center; }
   .sec-label { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.55em; color:var(--gold); opacity:0.8; text-transform:uppercase; }
   .sec-heading { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,5vw,3rem); font-weight:300; font-style:italic; color:var(--dark); }
   .scratch-hint { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.4em; color:var(--gold); opacity:0.7; }
@@ -158,7 +158,7 @@
   #rev-en.show { opacity:1; }
 
   /* ── COUNTDOWN ── */
-  #countdown { background:linear-gradient(135deg, #fefdfb 0%, #faf7f0 100%); }
+  #countdown { background:transparent; }
   .cd-grid {
     display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;align-items:center;
     padding: 2rem 0;
@@ -175,7 +175,7 @@
   .cd-footer { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.1em; color:var(--gold); opacity:0.6; margin-top:1.5rem; text-align:center; }
 
   /* ── VENUE ── */
-  #venue { background:linear-gradient(135deg, #faf7f0 0%, #f5f1e8 100%); }
+  #venue { background:transparent; }
   .venue-card { 
     background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(232,213,176,0.1)); 
     border:2px solid rgba(201,169,110,0.3); 
@@ -195,7 +195,7 @@
   .map-btn:hover { background:linear-gradient(135deg,rgba(201,169,110,0.4),rgba(232,213,176,0.25)); color:var(--dark); }
 
   /* ── CLOSING ── */
-  #closing { background:linear-gradient(135deg, #fefdfb 0%, #faf7f0 100%); }
+  #closing { background:transparent; }
   .ty { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,6vw,3.5rem); font-weight:300; font-style:italic; color:var(--dark); }
   .ty-body { max-width:500px; font-size:0.95rem; line-height:2; color:var(--dark); opacity:0.7; }
   .closing-names { font-family:'Cormorant Garamond',serif; font-size:clamp(1.5rem,4vw,2.2rem); font-weight:300; font-style:italic; color:var(--gold); margin-top:1.5rem; }
@@ -213,12 +213,21 @@
   .particle { animation:drift linear forwards; }
   @keyframes drift { from { transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0.08; } to { transform:translateY(100vh) translateX(var(--drift)) rotate(360deg); opacity:0; } }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    section { padding:3rem 1rem; }
-    #music-bar { bottom:0.8rem; }
-    .scratch-container { flex-direction: column; gap: 2rem; }
-    .scratch-wrap { width:180px; height:180px; }
+  .bg-shadow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    height: 800px;
+    background: url('bg-shadow.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.15;
+    filter: blur(5px) grayscale(100%);
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
   }
   .scratch-container {
     display: flex;
@@ -274,10 +283,21 @@
     color: var(--gold);
     text-transform: uppercase;
   }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    section { padding:3rem 1rem; }
+    #music-bar { bottom:0.8rem; }
+    .scratch-container { flex-direction: row; gap: 0.5rem; justify-content: space-around; }
+    .scratch-wrap { width:100px !important; height:100px !important; }
+    .date-val { font-size: 1.2rem; }
+    .date-type { font-size: 0.5rem; }
+  }
 </style>
 </head>
 <body>
 
+<div class="bg-shadow"></div>
 <div id="particles"></div>
 
 <!-- SPLASH -->
