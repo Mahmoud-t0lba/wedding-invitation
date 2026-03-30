@@ -58,20 +58,112 @@ jobs:
 
           touch "$WORKDIR/.nojekyll"
 
-          cat > "$WORKDIR/index.html" <<HTML
+          {
+            cat <<'HTML'
           <!doctype html>
           <html lang="en">
           <head>
             <meta charset="utf-8">
-            <meta http-equiv="refresh" content="0; url=./${BRANCH_PATH}/">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Wedding Invitation Branch Preview</title>
+            <title>Wedding Invitation Templates</title>
+            <style>
+              :root {
+                color-scheme: light;
+              }
+
+              * {
+                box-sizing: border-box;
+              }
+
+              body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: "Georgia", "Times New Roman", serif;
+                background:
+                  radial-gradient(circle at top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 35%),
+                  linear-gradient(180deg, #e9e1cf 0%, #d9d0bc 100%);
+                color: #4f4638;
+              }
+
+              main {
+                width: min(720px, calc(100vw - 32px));
+                margin: 0 auto;
+                padding: 56px 0 72px;
+              }
+
+              h1 {
+                margin: 0 0 12px;
+                font-size: clamp(2.4rem, 7vw, 3.8rem);
+                text-align: center;
+              }
+
+              p.lead {
+                margin: 0 auto 32px;
+                max-width: 44rem;
+                text-align: center;
+                font-size: 1rem;
+                line-height: 1.7;
+              }
+
+              ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                gap: 14px;
+              }
+
+              li {
+                padding: 18px 20px;
+                border-radius: 20px;
+                background: rgba(255, 250, 240, 0.82);
+                border: 1px solid rgba(111, 99, 79, 0.14);
+                box-shadow: 0 20px 40px rgba(79, 70, 56, 0.08);
+              }
+
+              a {
+                color: inherit;
+                text-decoration: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                font-weight: 700;
+              }
+
+              a span:last-child {
+                opacity: 0.72;
+                font-size: 0.92rem;
+              }
+
+              footer {
+                margin-top: 28px;
+                text-align: center;
+                font-size: 0.92rem;
+                opacity: 0.7;
+              }
+            </style>
           </head>
           <body>
-            <p>Open the branch preview here: <a href="./${BRANCH_PATH}/">${BRANCH_PATH}</a></p>
+            <main>
+              <h1>Wedding Invitation Templates</h1>
+              <p class="lead">Each preview below is published from its own branch path inside this same repository, so you can manage every template independently and open it directly from GitHub Pages.</p>
+              <ul>
+          HTML
+
+            find "$WORKDIR" -mindepth 1 -maxdepth 1 -type d ! -name '.git' | sort | while read -r path; do
+              branch_name="$(basename "$path")"
+              printf '                <li><a href="./%s/"><span>%s</span><span>/%s/</span></a></li>\n' "$branch_name" "$branch_name" "$branch_name"
+            done
+
+            cat <<'HTML'
+              </ul>
+              <footer>Root index updates automatically whenever any branch preview is deployed.</footer>
+            </main>
           </body>
           </html>
           HTML
+          } > "$WORKDIR/index.html"
 
           cd "$WORKDIR"
           git config user.name "$BOT_NAME"

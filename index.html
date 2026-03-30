@@ -173,6 +173,7 @@
       }
     }
   </style>
+  <script src="./scripts/weddingg-templates.js"></script>
   <script>
     (function () {
       var brandTitle = "Mahmoud & Salma";
@@ -197,7 +198,45 @@
         banquet_maps_url: "https://maps.app.goo.gl/S381m4eScjjCrZfE6"
       };
       var hiddenSectionRoles = ["accommodation", "transport", "gifts", "photo-strip", "faq"];
-      var weddinggTemplate = {
+      var weddinggTemplates = window.__WEDDINGG_TEMPLATES__ || {};
+      var defaultWeddinggTimeline = [
+        {
+          time: "5:30 PM",
+          title: "Guest Arrival",
+          description: "Guests arrive and are welcomed with refreshments."
+        },
+        {
+          time: "6:30 PM",
+          title: "Wedding Ceremony",
+          description: "The official wedding ceremony begins."
+        },
+        {
+          time: "8:00 PM",
+          title: "Dinner & Celebration",
+          description: "Dinner is served followed by music and celebration."
+        },
+        {
+          time: "11:30 PM",
+          title: "First Dance",
+          description: "The couple shares their first dance together."
+        },
+        {
+          time: "2:00 AM",
+          title: "Farewell",
+          description: "Celebration concludes and guests depart."
+        }
+      ];
+      var weddinggNote = {
+        heading: "A Note From Us",
+        subtitle: "Before the big day",
+        title: "Adults-only celebration",
+        paragraphs: [
+          "Adults-only celebration. Thank you for celebrating with us.",
+          "Please arrive a little early so everyone is comfortably seated before the ceremony.",
+          "We can't wait to celebrate this special night with you."
+        ]
+      };
+      var fallbackWeddinggTemplate = {
         slug: "omar-salma-templateee",
         assetOverrides: {
           "/assets/hero-video-CFWNpyZf.mp4": "assets/weddingg-templates/omar-salma-templateee/heroVideoUrl.mp4",
@@ -207,44 +246,39 @@
           "/assets/monogram-mj-ornate-CsWe4HSk.png": "assets/monogram-ms.svg",
           "/assets/monogram-mj-DiKHH2qa.png": "assets/monogram-ms.svg"
         },
-        timeline: [
-          {
-            time: "5:30 PM",
-            title: "Guest Arrival",
-            description: "Guests arrive and are welcomed with refreshments."
-          },
-          {
-            time: "6:30 PM",
-            title: "Wedding Ceremony",
-            description: "The official wedding ceremony begins."
-          },
-          {
-            time: "8:00 PM",
-            title: "Dinner & Celebration",
-            description: "Dinner is served followed by music and celebration."
-          },
-          {
-            time: "11:30 PM",
-            title: "First Dance",
-            description: "The couple shares their first dance together."
-          },
-          {
-            time: "2:00 AM",
-            title: "Farewell",
-            description: "Celebration concludes and guests depart."
-          }
-        ],
-        note: {
-          heading: "A Note From Us",
-          subtitle: "Before the big day",
-          title: "Adults-only celebration",
-          paragraphs: [
-            "Adults-only celebration. Thank you for celebrating with us.",
-            "Please arrive a little early so everyone is comfortably seated before the ceremony.",
-            "We can't wait to celebrate this special night with you."
-          ]
-        }
+        detailImage: "assets/weddingg-templates/omar-salma-templateee/heroPosterUrl.jpg",
+        timelineTopImage: "assets/weddingg-templates/omar-salma-templateee/introPosterUrl.jpg",
+        timelineBackdropImage: "assets/weddingg-templates/basel-tamara-template/footerImageUrl.png",
+        timeline: defaultWeddinggTimeline
       };
+      function resolveSelectedWeddinggTemplate() {
+        var candidates = [];
+
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var queryTemplate = params.get("template");
+          if (queryTemplate) {
+            candidates.push(queryTemplate);
+          }
+        } catch (error) { }
+
+        window.location.pathname.split("/").filter(Boolean).forEach(function (segment) {
+          candidates.push(segment);
+        });
+
+        candidates.push("weddingg-templates");
+        candidates.push("omar-salma-templateee");
+
+        for (var index = 0; index < candidates.length; index += 1) {
+          var candidate = candidates[index];
+          if (candidate && weddinggTemplates[candidate]) {
+            return weddinggTemplates[candidate];
+          }
+        }
+
+        return fallbackWeddinggTemplate;
+      }
+      var weddinggTemplate = resolveSelectedWeddinggTemplate();
       var firebaseStatePromise = null;
       var scrollLockEnabled = false;
       var lockedScrollKeys = {
@@ -269,7 +303,7 @@
       }
 
       function findAssetOverride(pathname) {
-        var overrides = weddinggTemplate.assetOverrides;
+        var overrides = weddinggTemplate.assetOverrides || {};
         var assetPath = String(pathname || "");
 
         for (var key in overrides) {
@@ -376,6 +410,13 @@
           return;
         }
 
+        var timelineItems = weddinggTemplate.timeline && weddinggTemplate.timeline.length
+          ? weddinggTemplate.timeline
+          : defaultWeddinggTimeline;
+        var detailImage = weddinggTemplate.detailImage || fallbackWeddinggTemplate.detailImage;
+        var timelineTopImage = weddinggTemplate.timelineTopImage || detailImage;
+        var timelineBackdropImage = weddinggTemplate.timelineBackdropImage || timelineTopImage;
+
         if (role === "hero") {
           var heroParagraphs = section.querySelectorAll("p");
           setNodeText(heroParagraphs[0], weddingSettings.hero_subtitle);
@@ -393,7 +434,7 @@
           var detailSubtitle = section.querySelector("div.text-center.mb-8 p");
           setNodeText(detailHeader, "Location");
           setNodeText(detailSubtitle, "Where to celebrate with us");
-          setNodeSource(section.querySelector("div.-mx-5 img, div.-mx-6 img"), "assets/weddingg-templates/omar-salma-templateee/heroPosterUrl.jpg");
+          setNodeSource(section.querySelector("div.-mx-5 img, div.-mx-6 img"), detailImage);
         } else if (role === "steps") {
           var timelineCards = Array.prototype.filter.call(section.querySelectorAll("div"), function (node) {
             return typeof node.className === "string" && node.className.indexOf("text-center py-1") !== -1 && !!node.querySelector("h3");
@@ -401,11 +442,11 @@
 
           setNodeText(section.querySelector("h2"), "Wedding Timeline");
           setNodeText(section.querySelector("div.text-center.mb-6 p"), "How the day unfolds");
-          setNodeSource(section.querySelector("div.flex.justify-center img"), "assets/weddingg-templates/omar-salma-templateee/introPosterUrl.jpg");
-          setNodeSource(section.querySelector("div.relative.mt-16 img"), "assets/weddingg-templates/basel-tamara-template/footerImageUrl.png");
+          setNodeSource(section.querySelector("div.flex.justify-center img"), timelineTopImage);
+          setNodeSource(section.querySelector("div.relative.mt-16 img"), timelineBackdropImage);
 
           timelineCards.forEach(function (card, index) {
-            var event = weddinggTemplate.timeline[index];
+            var event = timelineItems[index];
             if (!event) {
               card.style.display = "none";
               return;
@@ -431,12 +472,12 @@
           var noteParagraphs = noteCard ? noteCard.querySelectorAll("p") : [];
 
           section.setAttribute("data-section-role", "note");
-          setNodeText(section.querySelector("h2"), weddinggTemplate.note.heading);
-          setNodeText(section.querySelector("div.text-center.mb-0 p"), weddinggTemplate.note.subtitle);
-          setNodeText(noteCard ? noteCard.querySelector("h3") : null, weddinggTemplate.note.title);
-          setNodeText(noteParagraphs[0], weddinggTemplate.note.paragraphs[0]);
-          setNodeText(noteParagraphs[1], weddinggTemplate.note.paragraphs[1]);
-          setNodeText(noteParagraphs[2], weddinggTemplate.note.paragraphs[2]);
+          setNodeText(section.querySelector("h2"), weddinggNote.heading);
+          setNodeText(section.querySelector("div.text-center.mb-0 p"), weddinggNote.subtitle);
+          setNodeText(noteCard ? noteCard.querySelector("h3") : null, weddinggNote.title);
+          setNodeText(noteParagraphs[0], weddinggNote.paragraphs[0]);
+          setNodeText(noteParagraphs[1], weddinggNote.paragraphs[1]);
+          setNodeText(noteParagraphs[2], weddinggNote.paragraphs[2]);
         }
       }
 
