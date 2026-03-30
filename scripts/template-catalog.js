@@ -1,5 +1,21 @@
 window.__TEMPLATE_CATALOG__ = [
   {
+    pathSlug: "day-night",
+    title: "Day Night",
+    styleName: "Day Night",
+    preview: "assets/intro-poster-OYPMdQmi.jpg",
+    accent: "The original day-and-night experience with cinematic intro and elegant vertical framing.",
+    folderType: "standalone"
+  },
+  {
+    pathSlug: "classic-invitation",
+    title: "Wedding Invitation Classic",
+    styleName: "Classic Invite",
+    preview: "assets/monogram-ms.svg",
+    accent: "The earliest Mahmoud & Salma invite with the scratch-card date reveal and classic gold styling.",
+    folderType: "standalone"
+  },
+  {
     pathSlug: "lets-get-married-in-venice",
     sourceSlug: "ahmed-sara-template",
     title: "Let's Get Married in Venice",

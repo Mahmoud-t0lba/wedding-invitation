@@ -17,10 +17,14 @@ async function loadCatalog() {
 
 async function buildFolders() {
   const catalog = await loadCatalog();
-  const shellHtml = await fs.readFile(path.join(repoRoot, "index.html"), "utf8");
+  const shellHtml = await fs.readFile(path.join(repoRoot, "invitation-shell.html"), "utf8");
   const folderHtml = shellHtml.replace("<head>", "<head>\n  <base href=\"../\">");
 
   for (const item of catalog) {
+    if (item.folderType === "standalone") {
+      continue;
+    }
+
     const targetDir = path.join(repoRoot, item.pathSlug);
     await fs.mkdir(targetDir, { recursive: true });
     await fs.writeFile(path.join(targetDir, "index.html"), folderHtml);
