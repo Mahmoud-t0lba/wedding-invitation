@@ -45,16 +45,12 @@ jobs:
             --exclude 'firestore.rules' \
             ./ _site/
           touch _site/.nojekyll
-          tar --dereference --hard-dereference -cvf github-pages.tar -C _site .
-          gzip -f github-pages.tar
 
       - name: Upload Pages artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: github-pages
-          path: github-pages.tar.gz
-          retention-days: 1
-          compression-level: 0
+          path: _site
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
