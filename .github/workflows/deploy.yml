@@ -1,15 +1,18 @@
-name: Deploy Branch Preview to GitHub Pages
+name: Deploy Main Site to GitHub Pages
 
 on:
   push:
-    branches-ignore:
-      - gh-pages
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: branch-pages-${{ github.ref_name }}
+  group: pages
   cancel-in-progress: true
 
 env:
@@ -18,60 +21,39 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Publish current branch to gh-pages subpath
-        env:
-          BRANCH_PATH: ${{ github.ref_name }}
-          REPO_URL: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          BOT_NAME: github-actions[bot]
-          BOT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare site artifact
         run: |
           set -euo pipefail
-
-          WORKDIR="$(mktemp -d)"
-          trap 'rm -rf "$WORKDIR"' EXIT
-
-          if git ls-remote --exit-code --heads "$REPO_URL" gh-pages >/dev/null 2>&1; then
-            git clone --depth 1 --branch gh-pages "$REPO_URL" "$WORKDIR"
-          else
-            git init "$WORKDIR"
-            cd "$WORKDIR"
-            git checkout -b gh-pages
-            git remote add origin "$REPO_URL"
-          fi
-
-          TARGET_PATH="$WORKDIR/$BRANCH_PATH"
-          if [ "$BRANCH_PATH" = "main" ]; then
-            TARGET_PATH="$WORKDIR"
-          else
-            mkdir -p "$TARGET_PATH"
-          fi
-
+          mkdir -p _site
           rsync -av --delete \
             --exclude '.git/' \
             --exclude '.github/' \
             --exclude '.idea/' \
-            --exclude 'test-results/' \
-            --exclude 'generated-assets/' \
             --exclude '.DS_Store' \
-            ./ "$TARGET_PATH/"
+            --exclude '_site/' \
+            --exclude 'generated-assets/' \
+            --exclude 'imports/' \
+            --exclude 'test-results/' \
+            --exclude 'firebase.json' \
+            --exclude 'firestore.rules' \
+            ./ _site/
+          touch _site/.nojekyll
 
-          touch "$WORKDIR/.nojekyll"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
 
-          cd "$WORKDIR"
-          git config user.name "$BOT_NAME"
-          git config user.email "$BOT_EMAIL"
-          git add -A
-
-          if git diff --cached --quiet; then
-            echo "No Pages changes to publish."
-            exit 0
-          fi
-
-          git commit -m "Deploy ${GITHUB_SHA} to ${BRANCH_PATH}"
-          git push "$REPO_URL" gh-pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
