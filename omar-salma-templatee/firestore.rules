@@ -1,0 +1,61 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function optionalString(field, maxSize) {
+      return !(field in request.resource.data)
+        || request.resource.data[field] == null
+        || (request.resource.data[field] is string && request.resource.data[field].size() <= maxSize);
+    }
+
+    function validGuestPayload() {
+      return request.resource.data.keys().hasOnly([
+        "full_name",
+        "full_name_search",
+        "attendance",
+        "guest_count",
+        "dietary_requirements",
+        "message",
+        "email",
+        "phone",
+        "accommodation",
+        "needs_transport",
+        "song_request",
+        "companions",
+        "responded_at",
+        "created_at",
+        "updated_at"
+      ])
+      && request.resource.data.full_name is string
+      && request.resource.data.full_name.size() > 1
+      && request.resource.data.full_name.size() <= 100
+      && request.resource.data.full_name_search is string
+      && request.resource.data.full_name_search.size() > 1
+      && request.resource.data.full_name_search.size() <= 100
+      && request.resource.data.attendance is string
+      && request.resource.data.attendance.size() > 0
+      && request.resource.data.attendance.size() <= 10
+      && request.resource.data.guest_count is int
+      && request.resource.data.guest_count >= 0
+      && request.resource.data.guest_count <= 20
+      && request.resource.data.needs_transport is bool
+      && request.resource.data.companions is list
+      && request.resource.data.companions.size() <= 20
+      && optionalString("dietary_requirements", 300)
+      && optionalString("message", 1000)
+      && optionalString("email", 200)
+      && optionalString("phone", 30)
+      && optionalString("accommodation", 200)
+      && optionalString("song_request", 200)
+      && optionalString("responded_at", 60)
+      && optionalString("created_at", 60)
+      && optionalString("updated_at", 60);
+    }
+
+    match /guests/{guestId} {
+      allow read: if true;
+      allow create, update: if validGuestPayload();
+      allow delete: if false;
+    }
+  }
+}
