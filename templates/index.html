@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahmoud &amp; Salma Template Gallery</title>
+  <meta name="description" content="Browse all Mahmoud & Salma invitation styles.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <script src="../scripts/template-catalog.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f1e5;
+      --sand: #dfd4be;
+      --olive: #7b8066;
+      --ink: #4b4539;
+      --card: rgba(255, 251, 242, 0.82);
+      --line: rgba(75, 69, 57, 0.12);
+      --shadow: 0 22px 54px rgba(76, 69, 57, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Cormorant Garamond", "Georgia", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 35%),
+        linear-gradient(180deg, #ece3d1 0%, var(--paper) 45%, #efe7d8 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("../assets/bg-shadow-main.jpg") center center / 920px no-repeat;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-family: "Georgia", serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 500;
+      line-height: 0.95;
+    }
+
+    .lead {
+      width: min(760px, 100%);
+      margin: 18px auto 0;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: rgba(75, 69, 57, 0.78);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 26px 0 0;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(123, 128, 102, 0.22);
+      box-shadow: 0 16px 34px rgba(75, 69, 57, 0.08);
+    }
+
+    .action-link.primary {
+      background: linear-gradient(135deg, rgba(123, 128, 102, 0.94), rgba(103, 109, 84, 0.9));
+      color: #fffef9;
+      border-color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin-top: 38px;
+    }
+
+    .card {
+      overflow: hidden;
+      border-radius: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      height: 100%;
+    }
+
+    .preview {
+      aspect-ratio: 4 / 5;
+      background: #e0d7c7 center center / cover no-repeat;
+    }
+
+    .content {
+      padding: 20px 20px 22px;
+    }
+
+    .content .style {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .content .title {
+      margin: 10px 0 0;
+      font-size: 0.84rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(123, 128, 102, 0.92);
+    }
+
+    .content .accent {
+      margin: 12px 0 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(75, 69, 57, 0.74);
+    }
+
+    .content .url {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      color: rgba(75, 69, 57, 0.56);
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100vw - 20px, 100%);
+        padding-top: 28px;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .content .style {
+        font-size: 1.72rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Template Gallery</p>
+      <h1>Mahmoud &amp; Salma<br>Invitation Styles</h1>
+      <p class="lead">One branch, one project, many looks. Browse every invitation style below, open its dedicated folder, and compare the same Mahmoud &amp; Salma wedding data across all visual directions.</p>
+      <div class="actions">
+        <a class="action-link primary" href="../">Open Default Invite</a>
+        <a class="action-link" href="../sur-la-terrasse/">Open Featured Style</a>
+      </div>
+    </section>
+
+    <section>
+      <div id="template-grid" class="grid"></div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var catalog = window.__TEMPLATE_CATALOG__ || [];
+      var grid = document.getElementById("template-grid");
+
+      if (!grid) {
+        return;
+      }
+
+      catalog.forEach(function (item) {
+        var card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML =
+          '<a href="../' + item.pathSlug + '/">' +
+          '  <div class="preview" style="background-image:url(../' + item.preview + ')"></div>' +
+          '  <div class="content">' +
+          '    <h2 class="style">' + item.styleName + '</h2>' +
+          '    <p class="title">' + item.title + '</p>' +
+          '    <p class="accent">' + item.accent + '</p>' +
+          '    <p class="url">/' + item.pathSlug + '/</p>' +
+          '  </div>' +
+          '</a>';
+
+        grid.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>
