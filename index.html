@@ -1,595 +1,778 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mahmoud & Salma — Wedding Invitation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #c9a96e;
-    --gold-light: #e8d5b0;
-    --gold-deep: #8b6914;
-    --ivory: #faf7f0;
-    --dark: #1a1510;
-    --mid: #3d3020;
-    --bg-light: #fefdfb;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg-light); color: var(--dark); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
+  <link rel="stylesheet" href="./styles/dup6afg.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahmoud &amp; Salma</title>
+  <meta name="description" content="Wedding invitation for Mahmoud & Salma">
+  <meta name="author" content="Lovable" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image"
+    content="https://storage.googleapis.com/gpt-engineer-file-uploads/0j9uH4vSivM1S099FoFux2rSNHi1/social-images/social-1771945076770-Logo_The_Digital_Yes_2.webp">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Lovable" />
+  <meta name="twitter:image"
+    content="https://storage.googleapis.com/gpt-engineer-file-uploads/0j9uH4vSivM1S099FoFux2rSNHi1/social-images/social-1771945076770-Logo_The_Digital_Yes_2.webp">
+  <meta property="og:title" content="Mahmoud & Salma">
+  <meta name="twitter:title" content="Mahmoud & Salma">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <meta property="og:description" content="Wedding invitation for Mahmoud & Salma">
+  <meta name="twitter:description" content="Wedding invitation for Mahmoud & Salma">
+  <style>
+    :root {
+      --mobile-shell-width: 100vw;
+      --mobile-shell-left: 0px;
+      --mobile-shell-top: 0px;
+      --mobile-shell-height: 100vh;
+      --mobile-shell-radius: 0px;
+    }
 
-  /* ── MUSIC PLAYER ── */
-  #music-bar {
-    position: fixed;
-    bottom: 1.2rem; left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(255,255,255,0.85);
-    border: 1px solid rgba(201,169,110,0.3);
-    border-radius: 50px;
-    padding: 0.55rem 1.4rem;
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    backdrop-filter: blur(12px);
-    min-width: 80px;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-  }
-  #music-toggle {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: none;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.2s, transform 0.15s;
-    order: 3;
-  }
-  #music-toggle:hover { background: var(--gold-light); transform: scale(1.08); }
-  #music-toggle svg { width: 18px; height: 18px; fill: var(--dark); }
-  .music-info { display: none; }
-  .music-bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 2px;
-    height: 16px;
-    flex-shrink: 0;
-    order: 1;
-  }
-  .music-bar-line {
-    width: 3px;
-    background: var(--gold);
-    border-radius: 2px;
-    opacity: 0.5;
-    animation: barAnim 0.8s ease-in-out infinite;
-  }
-  .music-bar-line:nth-child(1) { height: 6px;  animation-delay: 0s; }
-  .music-bar-line:nth-child(2) { height: 12px; animation-delay: 0.15s; }
-  .music-bar-line:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
-  .music-bar-line:nth-child(4) { height: 14px; animation-delay: 0.1s; }
-  .music-bar-line.paused { animation-play-state: paused; }
-  @keyframes barAnim {
-    0%,100% { transform: scaleY(1); opacity: 0.5; }
-    50%      { transform: scaleY(1.8); opacity: 1; }
-  }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] {
+      position: relative;
+      min-height: 100vh;
+      background: #f6f1e5;
+      isolation: isolate;
+    }
 
-  /* ── SPLASH ── */
-  #splash {
-    position: fixed; inset: 0; z-index: 998;
-    background: linear-gradient(135deg, #fefdfb 0%, #f5f1e8 100%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem; cursor: pointer;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
-  #splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .splash-ornament { font-size: 1.4rem; color: var(--gold); animation: pulse 2s ease-in-out infinite; }
-  .splash-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,6vw,3.5rem); letter-spacing:0.15em; color:var(--dark); text-align:center; line-height:1.4; font-weight:300; font-style:italic; }
-  .splash-subtitle { font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; }
-  .splash-icon { font-size:3.5rem; animation:float 3s ease-in-out infinite; }
-  .splash-tap { font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.45em; color:var(--gold); text-transform:uppercase; animation:blink 1.5s ease-in-out infinite; text-align:center; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"]::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0) 36%),
+        linear-gradient(180deg, #e9e1cf 0%, #dcd2bf 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
 
-  /* ── MAIN ── */
-  #main { opacity:0; transition:opacity 1s ease 0.4s; }
-  #main.visible { opacity:1; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"]::after {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: min(118vw, 1100px);
+      height: min(118vw, 1100px);
+      transform: translate(-50%, -50%);
+      background: url("./assets/bg-shadow-main.jpg") no-repeat center center;
+      background-size: contain;
+      opacity: 0.14;
+      filter: blur(7px) grayscale(100%);
+      z-index: 0;
+      pointer-events: none;
+    }
 
-  section { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:5rem 1.5rem; position:relative; overflow:hidden; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] #root {
+      width: var(--mobile-shell-width);
+      min-height: var(--mobile-shell-height);
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+      background: hsl(var(--background));
+      border-radius: var(--mobile-shell-radius);
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(72, 69, 58, 0.24);
+    }
 
-  /* ── HERO ── */
-  #hero { background: transparent; text-align:center; gap:0; }
-  .hero-eyebrow { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.55em; color:var(--gold); opacity:0.8; text-transform:uppercase; margin-bottom:2.5rem; }
-  .divider { width:100px; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:0 auto; }
-  .names-en { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,13vw,8.5rem); font-weight:300; font-style:italic; line-height:0.9; color:var(--dark); display:flex; align-items:center; gap:1.2rem; justify-content:center; flex-wrap:wrap; margin:2rem 0 0.8rem; }
-  .amp { color:var(--gold); font-size:0.45em; font-style:normal; }
-  .invite-body { font-size:clamp(0.9rem,2vw,1.1rem); font-style:italic; color:var(--dark); opacity:0.6; max-width:400px; line-height:1.9; text-align:center; margin-top:1rem; }
-  .corner { position:absolute; font-size:1.3rem; color:var(--gold); opacity:0.2; }
-  .corner.tl { top:1.5rem; left:1.5rem; }
-  .corner.tr { top:1.5rem; right:1.5rem; transform:scaleX(-1); }
-  .corner.bl { bottom:1.5rem; left:1.5rem; transform:scaleY(-1); }
-  .corner.br { bottom:1.5rem; right:1.5rem; transform:scale(-1); }
-  .scroll-down { position:absolute; bottom:2rem; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.45em; color:var(--gold); opacity:0.4; animation:bounce 2s ease-in-out infinite; text-align:center; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main {
+      width: 100%;
+    }
 
-  /* ── SCRATCH ── */
-  #scratch-section { background:transparent; gap:1.8rem; text-align:center; }
-  .sec-label { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.55em; color:var(--gold); opacity:0.8; text-transform:uppercase; }
-  .sec-heading { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,5vw,3rem); font-weight:300; font-style:italic; color:var(--dark); }
-  .scratch-hint { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.4em; color:var(--gold); opacity:0.7; }
-  .scratch-wrap { position:relative; width:320px; height:320px; margin:0 auto; }
-  
-  /* Circular Scratch Card */
-  #scratch-canvas { 
-    position:absolute; top:0; left:0; width:100%; height:100%; 
-    border-radius:50%; 
-    cursor:crosshair; touch-action:none; transition:opacity 0.6s;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-  }
-  
-  .date-card { 
-    position:absolute; top:0; left:0; width:100%; height:100%;
-    border-radius:50%; 
-    background:linear-gradient(135deg,#e8d5b0,#c9a96e); 
-    display:flex; gap:0; justify-content:center; align-items:center;
-    font-family:'Cormorant Garamond',serif;
-  }
-  
-  .date-card-content {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:1.2rem;
-    text-align:center;
-    width:100%;
-  }
-  
-  .date-section {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:0.3rem;
-  }
-  
-  .date-day { font-size:2.8rem; font-weight:300; color:var(--dark); font-style:italic; }
-  .date-month { font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:0.15em; color:var(--dark); opacity:0.8; text-transform:uppercase; }
-  .date-year { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.1em; color:var(--dark); opacity:0.6; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main>section {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
 
-  #rev-en { opacity:0; transition:opacity 0.6s; }
-  #rev-en.show { opacity:1; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] .section-padding {
+      padding: 5rem 1.25rem !important;
+    }
 
-  /* ── COUNTDOWN ── */
-  #countdown { background:transparent; }
-  .cd-grid {
-    display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;align-items:center;
-    padding: 2rem 0;
-  }
-  .cd-col { display:flex; flex-direction:column; align-items:center; gap:0.35rem; }
-  .cd-num { 
-    font-family:'Cinzel',serif; font-size:clamp(1.5rem,4vw,2.4rem); 
-    font-weight:600; color:var(--dark); transition:transform 0.1s; 
-  }
-  .cd-num.tick { animation:tickPulse 0.3s ease; }
-  @keyframes tickPulse { 0% { transform:scale(1.15); } 100% { transform:scale(1); } }
-  .cd-lbl { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; color:var(--gold); opacity:0.7; text-transform:uppercase; }
-  .cd-sep { font-size:2rem; color:var(--gold); opacity:0.4; margin:0 0.4rem; }
-  .cd-footer { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.1em; color:var(--gold); opacity:0.6; margin-top:1.5rem; text-align:center; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main>section[data-section-role="hero"] {
+      min-height: var(--mobile-shell-height) !important;
+      padding-top: clamp(7rem, 18vh, 9.5rem) !important;
+    }
 
-  /* ── VENUE ── */
-  #venue { background:transparent; }
-  .venue-card { 
-    background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(232,213,176,0.1)); 
-    border:2px solid rgba(201,169,110,0.3); 
-    border-radius:20px; padding:2.5rem 2.5rem; max-width:380px; 
-    display:flex; flex-direction:column; gap:1.2rem; align-items:center; text-align:center; 
-  }
-  .venue-icon { font-size:2.8rem; }
-  .venue-name { font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:300; font-style:italic; color:var(--dark); }
-  .venue-detail { font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.05em; color:var(--gold); opacity:0.7; }
-  .map-btn { 
-    display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.8rem; 
-    padding:0.8rem 1.8rem; background:linear-gradient(135deg,rgba(201,169,110,0.25),rgba(232,213,176,0.15)); 
-    border:1.5px solid var(--gold); border-radius:50px; color:var(--gold); 
-    font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.05em; 
-    text-decoration:none; text-transform:uppercase; transition:all 0.3s; cursor:pointer; 
-  }
-  .map-btn:hover { background:linear-gradient(135deg,rgba(201,169,110,0.4),rgba(232,213,176,0.25)); color:var(--dark); }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main>section[data-section-role="hero"] h1 {
+      font-size: clamp(3.9rem, 15vw, 5.15rem) !important;
+      line-height: 0.95 !important;
+    }
 
-  /* ── CLOSING ── */
-  #closing { background:transparent; }
-  .ty { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,6vw,3.5rem); font-weight:300; font-style:italic; color:var(--dark); }
-  .ty-body { max-width:500px; font-size:0.95rem; line-height:2; color:var(--dark); opacity:0.7; }
-  .closing-names { font-family:'Cormorant Garamond',serif; font-size:clamp(1.5rem,4vw,2.2rem); font-weight:300; font-style:italic; color:var(--gold); margin-top:1.5rem; }
-  .copy { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; color:var(--gold); opacity:0.5; margin-top:2rem; }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main>section[data-section-role="hero"] p {
+      max-width: 18rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-  /* ── ANIMATIONS ── */
-  @keyframes pulse { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:0.9; transform:scale(1.1); } }
-  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-20px); } }
-  @keyframes bounce { 0%,100% { opacity:0.4; } 50% { opacity:0.8; } }
-  @keyframes blink { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main>section[data-section-role="countdown"] .grid,
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] main>section[data-section-role="countdown"] [class*="grid-cols-4"] {
+      gap: 0.65rem !important;
+    }
 
-  /* ── PARTICLES ── */
-  #particles { position:fixed; inset:0; z-index:-1; pointer-events:none; }
-  .particle { position:fixed; background:var(--gold); border-radius:50%; opacity:0.08; }
-  .particle { animation:drift linear forwards; }
-  @keyframes drift { from { transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0.08; } to { transform:translateY(100vh) translateX(var(--drift)) rotate(360deg); opacity:0; } }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] div.fixed.inset-0.z-50.cursor-pointer.bg-ivory {
+      left: var(--mobile-shell-left) !important;
+      top: var(--mobile-shell-top) !important;
+      right: auto !important;
+      bottom: auto !important;
+      width: var(--mobile-shell-width) !important;
+      height: var(--mobile-shell-height) !important;
+      transform: none !important;
+      border-radius: var(--mobile-shell-radius);
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(72, 69, 58, 0.24);
+    }
 
-  .bg-shadow {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 800px;
-    height: 800px;
-    background: url('bg-shadow.png') no-repeat center center;
-    background-size: contain;
-    opacity: 0.15;
-    filter: blur(5px) grayscale(100%);
-    z-index: -1;
-    pointer-events: none;
-    user-select: none;
-  }
-  .scratch-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-  }
-  .scratch-wrap {
-    position: relative;
-    width: 200px;
-    height: 200px;
-  }
-  .scratch-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    cursor: crosshair;
-    touch-action: none;
-    transition: opacity 0.6s;
-    z-index: 2;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  }
-  .date-card {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--ivory);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--gold-light);
-    z-index: 1;
-  }
-  .date-val {
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--dark);
-    font-style: italic;
-  }
-  .date-type {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] button.fixed.bottom-6.right-6.z-50 {
+      left: calc(var(--mobile-shell-left) + var(--mobile-shell-width) - 4.5rem) !important;
+      right: auto !important;
+      bottom: calc(var(--mobile-shell-top) + 1rem) !important;
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    section { padding:3rem 1rem; }
-    #music-bar { bottom:0.8rem; }
-    .scratch-container { flex-direction: row; gap: 0.5rem; justify-content: space-around; }
-    .scratch-wrap { width:100px !important; height:100px !important; }
-    .date-val { font-size: 1.2rem; }
-    .date-type { font-size: 0.5rem; }
-  }
-</style>
+    body[data-brand-ready="true"][data-force-mobile-shell="true"] footer.relative.text-center.bg-cover.bg-bottom.min-h-\[500px\] {
+      min-height: 420px !important;
+    }
+
+    body[data-brand-ready="true"] main>section[data-section-hidden="true"] {
+      display: none !important;
+    }
+
+    body[data-brand-ready="true"] main>section[data-section-role="countdown"] {
+      position: relative;
+      z-index: 1;
+    }
+
+    body[data-brand-ready="true"] main>section[data-section-role="steps"] {
+      position: relative;
+      z-index: 1;
+      padding-bottom: clamp(3rem, 6vw, 6rem) !important;
+    }
+
+    body[data-brand-ready="true"] main>section[data-section-role="steps"] .section-steps-overlay {
+      position: relative !important;
+      inset: auto !important;
+      margin-top: clamp(-2rem, -3vw, -1rem) !important;
+      padding-bottom: 0 !important;
+    }
+
+    body[data-brand-ready="true"] main>section[data-section-role="rsvp"] {
+      position: relative;
+      z-index: 2;
+      margin-top: clamp(2.5rem, 6vw, 5rem) !important;
+      padding-top: clamp(4rem, 7vw, 5.5rem) !important;
+    }
+
+    @media (min-width: 1024px) {
+      body[data-brand-ready="true"] main>section[data-section-role="hero"] {
+        min-height: calc(100vh + 160px) !important;
+        padding-top: clamp(9rem, 16vh, 12rem) !important;
+      }
+
+      body[data-brand-ready="true"] main>section[data-section-role="hero"] video {
+        object-position: center 42% !important;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      var brandTitle = "Mahmoud & Salma";
+      var assetsPrefix = "/assets/";
+      var oldMusicPath = "/assets/intro-music-CzqJOUtA.mp3";
+      var customMusicPath = "song.mp3";
+      var firebaseConfig = {
+        apiKey: "AIzaSyD-DtwHj1HKR-W4jbnJOyahtDAwBorh5Tk",
+        authDomain: "mazloum-82a65.firebaseapp.com",
+        projectId: "mazloum-82a65",
+        storageBucket: "mazloum-82a65.firebasestorage.app",
+        messagingSenderId: "259488054973",
+        appId: "1:259488054973:web:ec476997df6aa2777501d4"
+      };
+      var weddingSettings = {
+        couple_name_1: "Mahmoud",
+        couple_name_2: "Salma",
+        wedding_date: "2026-11-26",
+        hero_subtitle: "You are invited",
+        banquet_location: "Elite Hall",
+        banquet_address: "Mansoura, Egypt",
+        banquet_maps_url: "https://maps.app.goo.gl/S381m4eScjjCrZfE6"
+      };
+      var hiddenSectionRoles = ["dress", "accommodation", "transport", "gifts", "photo-strip"];
+      var firebaseStatePromise = null;
+      var scrollLockEnabled = false;
+      var lockedScrollKeys = {
+        " ": true,
+        ArrowDown: true,
+        ArrowUp: true,
+        PageDown: true,
+        PageUp: true,
+        Home: true,
+        End: true
+      };
+      window.__WEDDING_SETTINGS__ = weddingSettings;
+      var path = window.location.pathname;
+
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+
+      if (/\/index\.html$/.test(path)) {
+        var nextPath = path.replace(/\/index\.html$/, "/");
+        window.history.replaceState(window.history.state, "", nextPath + window.location.search + window.location.hash);
+      }
+
+      function remapAssetUrl(value) {
+        try {
+          var resolved = new URL(String(value), window.location.href);
+          if (resolved.pathname === oldMusicPath || resolved.pathname.slice(-oldMusicPath.length) === oldMusicPath) {
+            return customMusicPath;
+          }
+          if (resolved.pathname.indexOf(assetsPrefix) === 0) {
+            return "assets/" + resolved.pathname.slice(assetsPrefix.length);
+          }
+        } catch (error) { }
+
+        return value;
+      }
+
+      function remapStyleValue(value) {
+        if (typeof value !== "string") {
+          return value;
+        }
+
+        return value.replace(/url\((['"]?)\/assets\//g, "url($1assets/");
+      }
+
+      function resetScrollPosition() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }
+
+      function updateMobileShellMetrics() {
+        var shellWidth = window.innerWidth <= 560
+          ? window.innerWidth
+          : Math.min(window.innerWidth - 20, 660);
+        var shellTop = window.innerWidth > 560 ? 18 : 0;
+        var shellHeight = Math.max(window.innerHeight - shellTop * 2, 0);
+        var shellLeft = Math.max((window.innerWidth - shellWidth) / 2, 0);
+        var shellRadius = shellTop > 0 ? 32 : 0;
+
+        document.documentElement.style.setProperty("--mobile-shell-width", shellWidth + "px");
+        document.documentElement.style.setProperty("--mobile-shell-left", shellLeft + "px");
+        document.documentElement.style.setProperty("--mobile-shell-top", shellTop + "px");
+        document.documentElement.style.setProperty("--mobile-shell-height", shellHeight + "px");
+        document.documentElement.style.setProperty("--mobile-shell-radius", shellRadius + "px");
+        document.body.setAttribute("data-force-mobile-shell", "true");
+      }
+
+      function isIntroPosterVisible() {
+        return !!document.querySelector("div.fixed.inset-0.z-50.cursor-pointer.bg-ivory");
+      }
+
+      function handleLockedScroll(event) {
+        if (!scrollLockEnabled) {
+          return;
+        }
+
+        if (event.type === "keydown" && !lockedScrollKeys[event.key]) {
+          return;
+        }
+
+        event.preventDefault();
+        resetScrollPosition();
+      }
+
+      function setScrollLock(locked) {
+        if (scrollLockEnabled === locked) {
+          if (locked) {
+            resetScrollPosition();
+          }
+          return;
+        }
+
+        scrollLockEnabled = locked;
+
+        var overflowValue = locked ? "hidden" : "";
+        var touchActionValue = locked ? "none" : "";
+        var overscrollValue = locked ? "none" : "";
+
+        document.documentElement.style.overflow = overflowValue;
+        document.body.style.overflow = overflowValue;
+        document.documentElement.style.overscrollBehavior = overscrollValue;
+        document.body.style.overscrollBehavior = overscrollValue;
+        document.body.style.touchAction = touchActionValue;
+
+        if (locked) {
+          resetScrollPosition();
+        }
+      }
+
+      function getRequestHeaders(input, init) {
+        if (init && init.headers) {
+          return new Headers(init.headers);
+        }
+
+        if (input instanceof Request) {
+          return new Headers(input.headers);
+        }
+
+        return new Headers();
+      }
+
+      function wantsSingleObject(headers) {
+        return (headers.get("accept") || "").indexOf("application/vnd.pgrst.object+json") !== -1;
+      }
+
+      function jsonResponse(payload, status) {
+        return new Response(payload === null ? "null" : JSON.stringify(payload), {
+          status: status || 200,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+      }
+
+      function jsonErrorResponse(error, status) {
+        return new Response(JSON.stringify({
+          message: error && error.message ? error.message : "Firebase request failed"
+        }), {
+          status: status || 500,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+      }
+
+      function normalizeGuestName(value) {
+        return String(value || "").trim().toLowerCase();
+      }
+
+      function guestDocumentIdFromName(value) {
+        return String(value || "")
+          .trim()
+          .replace(/\//g, "／");
+      }
+
+      function loadFirebaseState() {
+        if (!firebaseStatePromise) {
+          firebaseStatePromise = Promise.all([
+            import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"),
+            import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js")
+          ]).then(function (modules) {
+            var appModule = modules[0];
+            var firestoreModule = modules[1];
+            var app = appModule.getApps().length ? appModule.getApp() : appModule.initializeApp(firebaseConfig);
+            var db = firestoreModule.getFirestore(app);
+
+            return {
+              db: db,
+              firestoreModule: firestoreModule
+            };
+          });
+        }
+
+        return firebaseStatePromise;
+      }
+
+      function guestDocToRecord(snapshot) {
+        var data = snapshot.data() || {};
+        return Object.assign({
+          id: snapshot.id
+        }, data);
+      }
+
+      function shapeGuestPayload(payload, existingRecord) {
+        var nowIso = new Date().toISOString();
+        var nextPayload = Object.assign({}, payload || {});
+
+        nextPayload.full_name = String(nextPayload.full_name || "").trim();
+        nextPayload.full_name_search = normalizeGuestName(nextPayload.full_name);
+        nextPayload.guest_count = Number(nextPayload.guest_count || 0);
+        nextPayload.needs_transport = !!nextPayload.needs_transport;
+        nextPayload.companions = Array.isArray(nextPayload.companions) ? nextPayload.companions : [];
+        nextPayload.responded_at = nextPayload.responded_at || nowIso;
+        nextPayload.created_at = existingRecord && existingRecord.created_at ? existingRecord.created_at : (nextPayload.created_at || nextPayload.responded_at || nowIso);
+        nextPayload.updated_at = nowIso;
+
+        return nextPayload;
+      }
+
+      async function readRequestJson(input, init) {
+        var rawBody = "";
+
+        if (init && typeof init.body === "string") {
+          rawBody = init.body;
+        } else if (input instanceof Request) {
+          rawBody = await input.clone().text();
+        }
+
+        if (!rawBody) {
+          return null;
+        }
+
+        return JSON.parse(rawBody);
+      }
+
+      async function handleGuestFetch(resolved, input, init, headers) {
+        var firebaseState = await loadFirebaseState();
+        var firestore = firebaseState.firestoreModule;
+        var db = firebaseState.db;
+        var method = (init && init.method) || (input instanceof Request ? input.method : "GET");
+        var collectionRef = firestore.collection(db, "guests");
+        var wantsSingle = wantsSingleObject(headers);
+
+        if (method === "GET") {
+          var selectValue = resolved.searchParams.get("select") || "*";
+          var fullNameFilter = resolved.searchParams.get("full_name");
+          var idFilter = resolved.searchParams.get("id");
+
+          if (idFilter && idFilter.indexOf("eq.") === 0) {
+            var guestId = decodeURIComponent(idFilter.slice(3));
+            var guestSnapshot = await firestore.getDoc(firestore.doc(db, "guests", guestId));
+            var guestRecord = guestSnapshot.exists() ? guestDocToRecord(guestSnapshot) : null;
+
+            if (selectValue === "id" && guestRecord) {
+              guestRecord = { id: guestRecord.id };
+            }
+
+            return jsonResponse(wantsSingle ? guestRecord : (guestRecord ? [guestRecord] : []), 200);
+          }
+
+          if (fullNameFilter && fullNameFilter.indexOf("ilike.") === 0) {
+            var rawFullName = decodeURIComponent(fullNameFilter.slice(6)).replace(/%/g, "");
+            var guestQuery = firestore.query(
+              collectionRef,
+              firestore.where("full_name_search", "==", normalizeGuestName(rawFullName)),
+              firestore.limit(1)
+            );
+            var guestQuerySnapshot = await firestore.getDocs(guestQuery);
+            var foundGuest = guestQuerySnapshot.empty ? null : guestDocToRecord(guestQuerySnapshot.docs[0]);
+
+            if (selectValue === "id" && foundGuest) {
+              foundGuest = { id: foundGuest.id };
+            }
+
+            return jsonResponse(wantsSingle ? foundGuest : (foundGuest ? [foundGuest] : []), 200);
+          }
+
+          var listQuery = firestore.query(collectionRef, firestore.orderBy("responded_at", "desc"));
+          var listSnapshot = await firestore.getDocs(listQuery);
+          var guestRecords = listSnapshot.docs.map(guestDocToRecord);
+
+          if (selectValue === "id") {
+            guestRecords = guestRecords.map(function (record) {
+              return { id: record.id };
+            });
+          }
+
+          return jsonResponse(wantsSingle ? (guestRecords[0] || null) : guestRecords, 200);
+        }
+
+        if (method === "POST") {
+          var createdPayload = await readRequestJson(input, init);
+          if (Array.isArray(createdPayload)) {
+            createdPayload = createdPayload[0] || null;
+          }
+
+          var guestShape = shapeGuestPayload(createdPayload, null);
+          var guestId = guestDocumentIdFromName(guestShape.full_name);
+          if (!guestId) {
+            throw new Error("Missing guest full name for Firebase document id");
+          }
+
+          var createdRef = firestore.doc(db, "guests", guestId);
+          await firestore.setDoc(createdRef, guestShape, { merge: true });
+          var createdSnapshot = await firestore.getDoc(createdRef);
+          var createdRecord = guestDocToRecord(createdSnapshot);
+
+          return jsonResponse(wantsSingle ? createdRecord : [createdRecord], 201);
+        }
+
+        if (method === "PATCH") {
+          var updatePayload = await readRequestJson(input, init);
+          if (Array.isArray(updatePayload)) {
+            updatePayload = updatePayload[0] || null;
+          }
+
+          var updateFilter = resolved.searchParams.get("id") || "";
+          if (updateFilter.indexOf("eq.") !== 0) {
+            throw new Error("Missing guest id for Firebase update");
+          }
+
+          var updateId = decodeURIComponent(updateFilter.slice(3));
+          var updateRef = firestore.doc(db, "guests", updateId);
+          var existingSnapshot = await firestore.getDoc(updateRef);
+          var existingRecord = existingSnapshot.exists() ? guestDocToRecord(existingSnapshot) : null;
+          var mergedPayload = shapeGuestPayload(Object.assign({}, existingRecord || {}, updatePayload || {}), existingRecord);
+
+          await firestore.setDoc(updateRef, mergedPayload, { merge: true });
+
+          var updatedSnapshot = await firestore.getDoc(updateRef);
+          var updatedRecord = guestDocToRecord(updatedSnapshot);
+
+          return jsonResponse(wantsSingle ? updatedRecord : [updatedRecord], 200);
+        }
+
+        if (method === "DELETE") {
+          var deleteFilter = resolved.searchParams.get("id") || "";
+          if (deleteFilter.indexOf("eq.") !== 0) {
+            throw new Error("Missing guest id for Firebase delete");
+          }
+
+          var deleteId = decodeURIComponent(deleteFilter.slice(3));
+          await firestore.deleteDoc(firestore.doc(db, "guests", deleteId));
+          return jsonResponse([], 200);
+        }
+
+        return jsonErrorResponse(new Error("Unsupported Firebase guest method"), 405);
+      }
+
+      if (window.fetch) {
+        var originalFetch = window.fetch.bind(window);
+        window.fetch = function (input, init) {
+          var url = typeof input === "string" ? input : input instanceof Request ? input.url : String(input);
+          var headers = getRequestHeaders(input, init);
+
+          try {
+            var resolved = new URL(url, window.location.href);
+            if (/\/rest\/v1\/wedding_settings\b/.test(resolved.pathname)) {
+              return Promise.resolve(new Response(JSON.stringify(weddingSettings), {
+                status: 200,
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              }));
+            }
+
+            if (/\/rest\/v1\/guests\b/.test(resolved.pathname)) {
+              return handleGuestFetch(resolved, input, init, headers).catch(function (error) {
+                console.error("Firebase guest sync failed", error);
+                return jsonErrorResponse(error, 500);
+              });
+            }
+          } catch (error) { }
+
+          if (typeof input === "string") {
+            input = remapAssetUrl(input);
+          } else if (input instanceof Request) {
+            input = new Request(remapAssetUrl(input.url), input);
+          }
+
+          return originalFetch(input, init);
+        };
+      }
+
+      var originalSetAttribute = Element.prototype.setAttribute;
+      Element.prototype.setAttribute = function (name, value) {
+        if (name === "src" || name === "poster" || name === "href") {
+          value = remapAssetUrl(value);
+        } else if (name === "style") {
+          value = remapStyleValue(value);
+        }
+
+        return originalSetAttribute.call(this, name, value);
+      };
+
+      var originalStyleSetProperty = CSSStyleDeclaration.prototype.setProperty;
+      CSSStyleDeclaration.prototype.setProperty = function (name, value, priority) {
+        return originalStyleSetProperty.call(this, name, remapStyleValue(value), priority);
+      };
+
+      function patchUrlProperty(prototype, propertyName) {
+        if (!prototype) {
+          return;
+        }
+
+        var descriptor = Object.getOwnPropertyDescriptor(prototype, propertyName);
+        if (!descriptor || !descriptor.set) {
+          return;
+        }
+
+        Object.defineProperty(prototype, propertyName, {
+          configurable: true,
+          enumerable: descriptor.enumerable,
+          get: descriptor.get,
+          set: function (value) {
+            descriptor.set.call(this, remapAssetUrl(value));
+          }
+        });
+      }
+
+      function patchStyleProperty(propertyName) {
+        var descriptor = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, propertyName);
+        if (!descriptor || !descriptor.set) {
+          return;
+        }
+
+        Object.defineProperty(CSSStyleDeclaration.prototype, propertyName, {
+          configurable: true,
+          enumerable: descriptor.enumerable,
+          get: descriptor.get,
+          set: function (value) {
+            descriptor.set.call(this, remapStyleValue(value));
+          }
+        });
+      }
+
+      patchUrlProperty(HTMLImageElement.prototype, "src");
+      patchUrlProperty(HTMLVideoElement.prototype, "src");
+      patchUrlProperty(HTMLVideoElement.prototype, "poster");
+      patchUrlProperty(HTMLAudioElement.prototype, "src");
+      patchUrlProperty(HTMLSourceElement.prototype, "src");
+      patchUrlProperty(HTMLLinkElement.prototype, "href");
+      patchUrlProperty(HTMLAnchorElement.prototype, "href");
+      patchStyleProperty("background");
+      patchStyleProperty("backgroundImage");
+
+      function forceAudioPlayback() {
+        var audio = document.querySelector("audio");
+        if (!audio) {
+          return;
+        }
+
+        audio.muted = false;
+        if (!audio.volume || audio.volume < 0.35) {
+          audio.volume = 0.5;
+        }
+
+        var promise = audio.play();
+        if (promise && typeof promise.catch === "function") {
+          promise.catch(function () { });
+        }
+      }
+
+      function bindAudioUnlockers() {
+        ["click", "pointerdown", "touchstart", "keydown"].forEach(function (eventName) {
+          document.addEventListener(eventName, forceAudioPlayback, { passive: true });
+        });
+      }
+
+      var layoutOverrideScheduled = false;
+
+      function applyLayoutOverrides() {
+        Array.prototype.forEach.call(document.querySelectorAll("*"), function (element) {
+          if (!element.style) {
+            return;
+          }
+
+          if (element.style.backgroundImage) {
+            element.style.backgroundImage = remapStyleValue(element.style.backgroundImage);
+          }
+
+          if (element.style.background) {
+            element.style.background = remapStyleValue(element.style.background);
+          }
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll("main > section"), function (section, index) {
+          var text = (section.innerText || "").replace(/\s+/g, " ").trim();
+          var heading = section.querySelector("h1, h2, h3");
+          var headingText = heading ? (heading.textContent || "").replace(/\s+/g, " ").trim() : "";
+          var role = "";
+
+          if (index === 0) {
+            role = "hero";
+          } else if (section.id === "countdown" || headingText === "Countdown") {
+            role = "countdown";
+          } else if (section.id === "rsvp" || headingText === "RSVP") {
+            role = "rsvp";
+          } else if (headingText === "The Details") {
+            role = "details";
+          } else if (headingText === "Order of the Day") {
+            role = "steps";
+          } else if (headingText === "Dress Code") {
+            role = "dress";
+          } else if (headingText === "Accommodation") {
+            role = "accommodation";
+          } else if (headingText === "Transport") {
+            role = "transport";
+          } else if (headingText === "Gifts") {
+            role = "gifts";
+          } else if (!text) {
+            role = "photo-strip";
+          }
+
+          if (role) {
+            section.setAttribute("data-section-role", role);
+          }
+
+          var stepsOverlay = role === "steps" ? section.querySelector("div.absolute.inset-0.z-10") : null;
+          if (stepsOverlay) {
+            stepsOverlay.classList.add("section-steps-overlay");
+          }
+
+          var shouldHide = !text && role !== "hero" || hiddenSectionRoles.indexOf(role) !== -1;
+
+          section.setAttribute("data-section-hidden", shouldHide ? "true" : "false");
+
+          if (shouldHide) {
+            section.style.display = "none";
+          } else if (section.style.display === "none") {
+            section.style.display = "";
+          }
+        });
+
+        setScrollLock(isIntroPosterVisible());
+        document.body.setAttribute("data-brand-ready", "true");
+      }
+
+      function scheduleLayoutOverrides() {
+        if (layoutOverrideScheduled) {
+          return;
+        }
+
+        layoutOverrideScheduled = true;
+        requestAnimationFrame(function () {
+          layoutOverrideScheduled = false;
+          applyLayoutOverrides();
+        });
+      }
+
+      function startBrandOverrides() {
+        document.title = brandTitle;
+        updateMobileShellMetrics();
+        resetScrollPosition();
+        bindAudioUnlockers();
+        scheduleLayoutOverrides();
+
+        var observer = new MutationObserver(function () {
+          scheduleLayoutOverrides();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+
+        window.addEventListener("pageshow", function () {
+          resetScrollPosition();
+          scheduleLayoutOverrides();
+        });
+
+        window.addEventListener("pagehide", resetScrollPosition);
+        window.addEventListener("beforeunload", resetScrollPosition);
+        window.addEventListener("resize", function () {
+          updateMobileShellMetrics();
+          scheduleLayoutOverrides();
+        });
+        document.addEventListener("wheel", handleLockedScroll, { passive: false });
+        document.addEventListener("touchmove", handleLockedScroll, { passive: false });
+        document.addEventListener("keydown", handleLockedScroll, { passive: false });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startBrandOverrides, { once: true });
+      } else {
+        startBrandOverrides();
+      }
+    })();
+  </script>
+  <script type="module" crossorigin src="./scripts/index-B8zKg5iA.js"></script>
+  <link rel="stylesheet" crossorigin href="./styles/index-BpIadFQV.css">
 </head>
+
 <body>
-
-<div class="bg-shadow"></div>
-<div id="particles"></div>
-
-<!-- SPLASH -->
-<div id="splash">
-  <div class="splash-ornament">✦</div>
-  <div class="splash-subtitle">You are cordially invited to celebrate</div>
-  <div class="splash-title">Mahmoud<br><span style="color:var(--gold)">&</span><br>Salma</div>
-  <div class="splash-icon">💍</div>
-  <div class="splash-tap">TAP TO OPEN</div>
-</div>
-
-<!-- MUSIC PLAYER -->
-<div id="music-bar">
-  <div class="music-bars">
-    <div class="music-bar-line"></div>
-    <div class="music-bar-line"></div>
-    <div class="music-bar-line"></div>
-    <div class="music-bar-line"></div>
-  </div>
-  <div class="music-info"></div>
-  <button id="music-toggle" title="Toggle Music">
-    <svg id="ico-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 5v14l11-7z"/>
-    </svg>
-    <svg id="ico-pause" style="display:none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-    </svg>
-  </button>
-</div>
-
-<!-- HIDDEN AUDIO -->
-<audio id="bgm" loop>
-  <source src="We.Akhyran-Esseily-MaTb3aa.Com.mp3" type="audio/mpeg">
-</audio>
-
-<!-- MAIN CONTENT -->
-<div id="main">
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="corner tl">✦</div>
-    <div class="corner tr">✦</div>
-    <div class="corner bl">✦</div>
-    <div class="corner br">✦</div>
-    <div class="hero-eyebrow">You Are Invited</div>
-    <div class="divider"></div>
-    <div class="names-en">Mahmoud <span class="amp">&</span> Salma</div>
-    <div class="invite-body">Together with their families request the honour of your presence at the celebration of their marriage</div>
-    <div class="scroll-down">SCROLL DOWN ↓</div>
-  </section>
-
-  <!-- SCRATCH CARD -->
-  <section id="scratch-section">
-    <div>
-      <div class="sec-label">Reveal The Date</div>
-    </div>
-    <div class="divider"></div>
-    <div class="sec-heading">Save the Date</div>
-    <div class="scratch-hint">👇 SCRATCH TO DISCOVER 👇</div>
-    <div class="scratch-container">
-      <!-- Day Circle -->
-      <div class="scratch-wrap">
-        <canvas id="scratch-day" class="scratch-canvas"></canvas>
-        <div class="date-card">
-          <div class="date-val">26</div>
-          <div class="date-type">Day</div>
-        </div>
-      </div>
-      <!-- Month Circle -->
-      <div class="scratch-wrap">
-        <canvas id="scratch-month" class="scratch-canvas"></canvas>
-        <div class="date-card">
-          <div class="date-val">Nov</div>
-          <div class="date-type">Month</div>
-        </div>
-      </div>
-      <!-- Year Circle -->
-      <div class="scratch-wrap">
-        <canvas id="scratch-year" class="scratch-canvas"></canvas>
-        <div class="date-card">
-          <div class="date-val">2026</div>
-          <div class="date-type">Year</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COUNTDOWN -->
-  <section id="countdown">
-    <div class="sec-label">The Big Day Is</div>
-    <div class="divider"></div>
-    <div class="cd-grid" id="cd-grid">
-      <div class="cd-col">
-        <div class="cd-num" id="cd-d">00</div>
-        <div class="cd-lbl">Days</div>
-      </div>
-      <div class="cd-sep">:</div>
-      <div class="cd-col">
-        <div class="cd-num" id="cd-h">00</div>
-        <div class="cd-lbl">Hours</div>
-      </div>
-      <div class="cd-sep">:</div>
-      <div class="cd-col">
-        <div class="cd-num" id="cd-m">00</div>
-        <div class="cd-lbl">Minutes</div>
-      </div>
-      <div class="cd-sep">:</div>
-      <div class="cd-col">
-        <div class="cd-num" id="cd-s">00</div>
-        <div class="cd-lbl">Seconds</div>
-      </div>
-    </div>
-    <div class="cd-footer">Until the big day — 26 November 2026</div>
-  </section>
-
-  <!-- VENUE -->
-  <section id="venue">
-    <div>
-      <div class="sec-label">The Celebration Will Take Place At</div>
-    </div>
-    <div class="divider"></div>
-    <div class="venue-card">
-      <div class="venue-icon">🏛️</div>
-      <div class="venue-name">Elite Hall</div>
-      <div class="divider" style="width:70px;margin:0"></div>
-      <div class="venue-detail">Mansoura, Egypt</div>
-      <a href="https://maps.app.goo.gl/S381m4eScjjCrZfE6" target="_blank" class="map-btn">
-        📍 Open in Maps
-      </a>
-    </div>
-  </section>
-
-  <!-- CLOSING -->
-  <section id="closing">
-    <div class="divider" style="width:60px"></div>
-    <div class="ty">Thank You</div>
-    <div class="divider"></div>
-    <p class="ty-body">For joining us on this special day.<br>Your presence is the best gift<br>we could receive.</p>
-    <div class="closing-names">Mahmoud &amp; Salma</div>
-    <div style="color:var(--gold);font-size:1.3rem;opacity:0.3;margin-top:0.8rem">✦ ✦ ✦</div>
-    <div class="copy">© Wedding Invitation 2026</div>
-  </section>
-
-</div>
-
-<script>
-// ── PARTICLES ──
-const pc = document.getElementById('particles');
-for (let i = 0; i < 28; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const s = 1 + Math.random() * 2;
-  p.style.cssText = `left:${Math.random()*100}%;width:${s}px;height:${s}px;--drift:${(Math.random()-.5)*120}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*10}s`;
-  pc.appendChild(p);
-}
-
-// ── SPLASH + MUSIC ──
-const bgm = document.getElementById('bgm');
-const musicBars = document.querySelectorAll('.music-bar-line');
-const icoPlay = document.getElementById('ico-play');
-const icoPause = document.getElementById('ico-pause');
-let musicPlaying = false;
-
-function startMusic() {
-  bgm.play().then(() => {
-    musicPlaying = true;
-    icoPlay.style.display = 'none';
-    icoPause.style.display = '';
-    musicBars.forEach(b => b.classList.remove('paused'));
-  }).catch(() => {});
-}
-
-function toggleMusic() {
-  if (musicPlaying) {
-    bgm.pause();
-    musicPlaying = false;
-    icoPlay.style.display = '';
-    icoPause.style.display = 'none';
-    musicBars.forEach(b => b.classList.add('paused'));
-  } else {
-    startMusic();
-  }
-}
-
-document.getElementById('music-toggle').addEventListener('click', toggleMusic);
-
-document.getElementById('splash').addEventListener('click', () => {
-  document.getElementById('splash').classList.add('hidden');
-  document.getElementById('main').classList.add('visible');
-  startMusic();
-});
-
-// ── SCRATCH (MULTIPLE CIRCLES) ──
-class ScratchCard {
-  constructor(canvasId, text) {
-    this.canvas = document.getElementById(canvasId);
-    this.ctx = this.canvas.getContext('2d');
-    this.scratching = false;
-    this.text = text;
-    this.init();
-    this.addEvents();
-  }
-
-  init() {
-    const rect = this.canvas.parentElement;
-    this.canvas.width = rect.offsetWidth;
-    this.canvas.height = rect.offsetHeight;
-    
-    const centerX = this.canvas.width / 2;
-    const centerY = this.canvas.height / 2;
-    const radius = this.canvas.width / 2;
-    
-    const g = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
-    g.addColorStop(0,'#7a5c10'); 
-    g.addColorStop(0.3,'#c9a96e');
-    g.addColorStop(0.6,'#e8d5b0'); 
-    g.addColorStop(1,'#9a7018');
-    
-    this.ctx.fillStyle = g;
-    this.ctx.beginPath();
-    this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    this.ctx.fill();
-    
-    this.ctx.fillStyle = 'rgba(100,75,10,0.6)';
-    this.ctx.textAlign = 'center';
-    this.ctx.textBaseline = 'middle';
-    this.ctx.font = `bold ${Math.max(12, this.canvas.width*0.07)}px Cinzel,serif`;
-    this.ctx.fillText('✦ SCRATCH ✦', centerX, centerY);
-  }
-
-  doScratch(x, y) {
-    this.ctx.globalCompositeOperation = 'destination-out';
-    this.ctx.beginPath();
-    this.ctx.arc(x, y, 20, 0, Math.PI * 2);
-    this.ctx.fill();
-    this.ctx.globalCompositeOperation = 'source-over';
-    this.checkReveal();
-  }
-
-  checkReveal() {
-    const d = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
-    let transparent = 0;
-    for (let i = 3; i < d.length; i += 4) {
-      if (d[i] < 128) transparent++;
-    }
-    if (transparent / (d.length / 4) > 0.5) {
-      this.canvas.style.opacity = '0';
-      this.canvas.style.pointerEvents = 'none';
-    }
-  }
-
-  getPos(e) {
-    const r = this.canvas.getBoundingClientRect();
-    const src = e.touches ? e.touches[0] : e;
-    return { x: src.clientX - r.left, y: src.clientY - r.top };
-  }
-
-  addEvents() {
-    this.canvas.addEventListener('mousedown', e => { this.scratching = true; const p = this.getPos(e); this.doScratch(p.x, p.y); });
-    window.addEventListener('mousemove', e => { if (this.scratching) { const p = this.getPos(e); this.doScratch(p.x, p.y); } });
-    window.addEventListener('mouseup', () => this.scratching = false);
-    
-    this.canvas.addEventListener('touchstart', e => { e.preventDefault(); this.scratching = true; const p = this.getPos(e); this.doScratch(p.x, p.y); }, { passive: false });
-    this.canvas.addEventListener('touchmove', e => { e.preventDefault(); if (this.scratching) { const p = this.getPos(e); this.doScratch(p.x, p.y); } }, { passive: false });
-    this.canvas.addEventListener('touchend', () => this.scratching = false);
-  }
-}
-
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    new ScratchCard('scratch-day');
-    new ScratchCard('scratch-month');
-    new ScratchCard('scratch-year');
-  }, 150);
-});
-
-// ── COUNTDOWN ──
-function pad(n) { return String(n).padStart(2, '0'); }
-function tick(id, val) {
-  const el = document.getElementById(id), v = pad(val);
-  if (el.textContent !== v) { el.textContent = v; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); }
-}
-function runCountdown() {
-  const diff = new Date('2026-11-26T18:00:00+02:00') - new Date();
-  if (diff <= 0) { document.getElementById('cd-grid').innerHTML = `<div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;color:var(--gold);text-align:center">🎉 It's Time!</div>`; return; }
-  tick('cd-d', Math.floor(diff / 86400000));
-  tick('cd-h', Math.floor((diff % 86400000) / 3600000));
-  tick('cd-m', Math.floor((diff % 3600000) / 60000));
-  tick('cd-s', Math.floor((diff % 60000) / 1000));
-}
-runCountdown();
-setInterval(runCountdown, 1000);
-</script>
+  <div id="root"></div>
 </body>
+
 </html>
